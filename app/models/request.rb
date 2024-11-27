@@ -2,6 +2,8 @@ class Request < ApplicationRecord
   has_one :product, dependent: :destroy
   has_one :request_response, dependent: :destroy
 
+  validates :prompt, presence: true
+
   after_create :process_prompt
 
   private

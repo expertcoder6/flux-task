@@ -5,10 +5,11 @@ module Api
         request = Request.new(request_params)
 
         if request.save
+          response_details = SendRequestDetails.call(request)
           render json: {
             message: 'Request created successfully',
             request: request,
-            product: request.product
+            response: "Will be updated"
           }, status: :created
         else
           render json: { error: request.errors.full_messages }, status: :unprocessable_entity
