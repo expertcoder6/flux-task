@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_26_102435) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_27_092748) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,31 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_26_102435) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "link"
+    t.integer "request_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_id"], name: "index_products_on_request_id"
+  end
+
+  create_table "request_responses", force: :cascade do |t|
+    t.integer "request_id", null: false
+    t.string "image_url"
+    t.json "image_urls", default: []
+    t.json "metadata"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_id"], name: "index_request_responses_on_request_id"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.text "prompt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "request_responses", "requests"
 end
