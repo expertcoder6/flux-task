@@ -16,5 +16,6 @@ Rails.application.routes.draw do
       resources :requests, only: [:create, :show, :index]
     end
   end
+  root 'api/v1/requests#index'
 
 end

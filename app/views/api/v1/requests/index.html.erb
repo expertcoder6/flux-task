@@ -1,0 +1,14 @@
+<div class="container mx-auto py-6">
+  <h1 class="text-2xl font-bold mb-6">Requests</h1>
+
+  <div id="requests" class="space-y-4">
+    <%= turbo_frame_tag 'requests' do %>
+      <%= render @requests %>
+    <% end %>
+  </div>
+  <br>
+  <br>
+  <div class="mt-6">
+    <%= render 'form', request: Request.new %>
+  </div>
+</div>

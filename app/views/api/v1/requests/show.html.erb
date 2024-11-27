@@ -1,0 +1,23 @@
+<%= turbo_frame_tag dom_id(@request) do %>
+  <div class="bg-white shadow-md rounded-lg p-6">
+    <h2 class="text-lg font-bold mb-4">Request Details</h2>
+    <p><strong class="text-gray-900">Prompt:</strong> <%= @request.prompt %></p>
+    <div class='mt-4'>
+    <%if @request&.request_response.present? %>
+    <% if @request&.request_response.metadata['statusCode']%>
+      <%= @request&.request_response.metadata%>
+    <%else%>
+    <img src='https://fal.media/files/koala/8k3tdOlW4nkiVTcdc_tOi_89c3b9ddacca40a698cd16038f4b2cb9.jpg' class="respose_image">
+    <%end%>
+    <%else%>
+    <img src='https://fal.media/files/koala/8k3tdOlW4nkiVTcdc_tOi_89c3b9ddacca40a698cd16038f4b2cb9.jpg' class="respose_image">
+    <%end%>
+    </div>
+    <div class="mt-4">
+      <%= link_to 'Back', :back, 
+                  class: "text-blue-600 hover:underline", 
+                  data: { turbo_frame: 'requests' } %>
+    </div>
+
+  </div>
+<% end %>
