@@ -49,8 +49,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_27_092748) do
 
   create_table "request_responses", force: :cascade do |t|
     t.integer "request_id", null: false
-    t.string "image_url"
-    t.json "image_urls", default: []
     t.json "metadata"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

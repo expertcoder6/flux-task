@@ -2,22 +2,28 @@
   <div class="bg-white shadow-md rounded-lg p-6">
     <h2 class="text-lg font-bold mb-4">Request Details</h2>
     <p><strong class="text-gray-900">Prompt:</strong> <%= @request.prompt %></p>
-    <div class='mt-4'>
-    <%if @request&.request_response.present? %>
-    <% if @request&.request_response.metadata['statusCode']%>
-      <%= @request&.request_response.metadata%>
-    <%else%>
-    <img src='https://fal.media/files/koala/8k3tdOlW4nkiVTcdc_tOi_89c3b9ddacca40a698cd16038f4b2cb9.jpg' class="respose_image">
-    <%end%>
-    <%else%>
-    <img src='https://fal.media/files/koala/8k3tdOlW4nkiVTcdc_tOi_89c3b9ddacca40a698cd16038f4b2cb9.jpg' class="respose_image">
-    <%end%>
+    
+    <div class="mt-4">
+      <% if @request&.request_response.present? %>
+        <% if @request.request_response.image.attached? %>
+          <%= image_tag @request.request_response.image, alt: "Generated Image", class: "response_image rounded shadow-lg" %>
+        <% elsif @request.request_response.metadata&.dig('statusCode') %>
+          <div class="text-gray-800 bg-gray-100 p-4 rounded">
+            <p><strong>Metadata:</strong></p>
+            <%= @request.request_response.metadata.to_json %>
+          </div>
+        <% else %>
+          <img src="https://fal.media/files/koala/8k3tdOlW4nkiVTcdc_tOi_89c3b9ddacca40a698cd16038f4b2cb9.jpg" alt="Fallback Image" class="response_image">
+        <% end %>
+      <% else %>
+        <img src="https://fal.media/files/koala/8k3tdOlW4nkiVTcdc_tOi_89c3b9ddacca40a698cd16038f4b2cb9.jpg" alt="Fallback Image" class="response_image">
+      <% end %>
     </div>
+
     <div class="mt-4">
       <%= link_to 'Back', :back, 
                   class: "text-blue-600 hover:underline", 
                   data: { turbo_frame: 'requests' } %>
     </div>
-
   </div>
 <% end %>

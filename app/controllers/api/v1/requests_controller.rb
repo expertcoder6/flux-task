@@ -19,7 +19,7 @@ module Api
 
         if @request.save
           data = SendRequestDetails.call(@request)
-          
+
           respond_to do |format|
             format.turbo_stream do
               render turbo_stream: [turbo_stream.append(
