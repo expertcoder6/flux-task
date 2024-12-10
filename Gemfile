@@ -60,7 +60,7 @@ end
 
 gem "httparty", "~> 0.22.0"
 
-gem "nokogiri", "~> 1.16"
+gem "nokogiri", "~> 1.17"
 
 gem "sidekiq", "~> 7.3"
 
